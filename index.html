@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>TimeUntil</title>
+    <link rel="stylesheet" href="theme/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+    <meta name="theme-color" content="#4DB6AC"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+    #output{
+      margin-top: 25px;
+    }
+    #title{
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+    .navbar-collapse.collapse {
+      display: block!important;
+    }
+    .navbar-nav>li, .navbar-nav {
+      float: left !important;
+    }
+    .navbar-nav.navbar-right:last-child {
+      margin-right: -15px !important;
+    }
+    .navbar-right {
+      float: right!important;
+    }
+    .container {
+      margin-bottom: 24px;
+    }
+    .progress {
+      height: 40px;
+    }
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+      <a class="navbar-brand" href="#">TimeUntil</a>
+    </nav>
+
+    <div class="container">
+      <h1 id="title">Time until next events in the Universe</h1>
+      <p>Hover over/tap on a progress bar to see more information.</p>
+    </div>
+
+    <div class="container">
+      <h4 id="minute_text">🕔 Time until next minute</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_minute" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4 id="hour_text">🕔 Time until next hour</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_hour" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4 id="day_text">🕔 Time until next day</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_day" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4 id="month_text">🗓️ Time until next month</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_month" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4 id="year_text">🗓️ Time until next year</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_year" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_antares" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the year 0">
+      <h4 id="antares_text">💥 Estimated Antares explosion</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_antares" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_venus_mercury" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the year 0">
+      <h4 id="venus_mercury_text">☀️ Simultaneous Venus and Mercury solar transit</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_venus_mercury" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_vega" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the year 0">
+      <h4 id="vega_text">🌟 Vega is polar star</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_vega" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_arecibo" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from 1974">
+      <h4 id="arecibo_text">👽 The Arecibo message will reach its destination, the globular cluster M13</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_arecibo" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_polaris" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the year 0">
+      <h4 id="polaris_text">🌟 Polaris is polar star again</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_polaris" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_ross248" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the year 0">
+      <h4 id="ross248_text">🌟 Small red dwarf Ross 248 will pass within 3.024 light-years of Earth</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_ross248" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_uranus_neptune" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the year 0">
+      <h4 id="uranus_neptune_text">🌐 A transit of Uranus from Neptune, the rarest of all planetary transits</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_uranus_neptune" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_mars_plants" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting assuming we started this process 1000 years ago">
+      <h4 id="mars_plants_text">🌱 Time required to terraform Mars using plants</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_mars_plants" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_loihi" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the year 0">
+      <h4 id="loihi_text">🌋 Lōʻihi will rise above the surface of the ocean and become a volcanic island</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_loihi" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_venus_earth" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the year 0">
+      <h4 id="venus_earth_text">🌍 A simultaneous transit of Venus and the Earth will be seen from Mars</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_venus_earth" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_glass" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the year 0">
+      <h4 id="glass_text">🥂 Current glass objects in the environment will be decomposed</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_glass" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_gliese" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the first use of stone tools by humans">
+      <h4 id="gliese_text">🌟 Star Gliese 710 will pass 0.14 light-years away from the Sun</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_gliese" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_rushmore" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the first use of stone tools by humans">
+      <h4 id="rushmore_text">🏔️ Mount Rushmore will erode</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_rushmore" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_phobos_mars" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the beginning of the Solar System">
+      <h4 id="phobos_mars_text">💥 Phobos will collide with Mars</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_phobos_mars" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_orbit" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the beginning of the Solar System">
+      <h4 id="orbit_text">🌌 The Solar System will complete one full orbit around the Galactic center</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_orbit" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_luminosity" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the beginning of the Solar System">
+      <h4 id="luminosity_text">🌟 The Sun’s luminosity will increase by 10%</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_luminosity" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_and_mw" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the beginning of the Solar System">
+      <h4 id="and_mw_text">🌌 Andromeda Galaxy will collide with the Milky Way</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_and_mw" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_redgiant" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the beginning of the Solar System">
+      <h4 id="redgiant_text">🌟 Sun will begin to evolve into a red giant</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_redgiant" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_earthmoon" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the beginning of the Solar System">
+      <h4 id="earthmoon_text">🌍 Earth and Moon are very likely to be destroyed by expanding Sun</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_earthmoon" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_starformation" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the beginning of the Universe">
+      <h4 id="starformation_text">🌌 Star formation ends in galaxies</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_starformation" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_nucleons" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the beginning of the Universe">
+      <h4 id="nucleons_text">👻 Estimated minimal time for all nucleons in the observable universe to decay</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_nucleons" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+    <div class="container" id="tooltip_bhole" data-toggle="tooltip" data-placement="bottom" data-original-title="Counting from the beginning of the Universe">
+      <h4 id="bhole_text">⚫ Estimated time until the most massive black hole TON 618 will decay by the Hawking process</h4>
+      <div class="progress">
+        <div class="progress-bar bg-success" id="progress_bhole" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+  </body>
+</html>
